@@ -1,5 +1,7 @@
 # fibonacci
 
+[![CI](https://github.com/bilawalaziz/fibonacci/actions/workflows/ci.yml/badge.svg)](https://github.com/bilawalaziz/fibonacci/actions/workflows/ci.yml)
+
 A small Python project providing Fibonacci utilities and a Streamlit demo.
 
 Contents
