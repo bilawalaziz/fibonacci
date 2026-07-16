@@ -26,17 +26,43 @@ jobs:
         env:
           COVERAGE_THRESHOLD: 87
         run: |
-          # extract line-rate from coverage.xml (e.g. line-rate="0.87")
-          if [ ! -f coverage.xml ]; then echo "coverage.xml not found"; exit 1; fi
-          LR=$(grep -oP 'line-rate="\K[0-9\.]+(?=\")' coverage.xml || true)
-          if [ -z "$LR" ]; then echo "Could not parse coverage.xml"; cat coverage.xml; exit 1; fi
-          PCT=$(python - <<PY
-lr = float('$LR')
-print(int(round(lr*100)))
+          set -euo pipefail
+          COV_FILE=coverage.xml
+          if [ ! -f "$COV_FILE" ]; then
+            echo "ERROR: $COV_FILE not found at $(pwd)/$COV_FILE"
+            ls -la
+            exit 1
+          fi
+          echo "Parsing $COV_FILE..."
+          python - <<'PY'
+import sys, os, xml.etree.ElementTree as ET
+cov_file = os.path.join(os.getcwd(), 'coverage.xml')
+try:
+    tree = ET.parse(cov_file)
+    root = tree.getroot()
+    lr = None
+    if 'line-rate' in root.attrib:
+        lr = float(root.attrib['line-rate'])
+    else:
+        for elem in root.iter():
+            if 'line-rate' in elem.attrib:
+                lr = float(elem.attrib['line-rate'])
+                break
+    if lr is None:
+        print("ERROR: 'line-rate' attribute not found in coverage.xml; dumping file for debugging:")
+        print(open(cov_file).read())
+        sys.exit(1)
+    pct = int(round(lr * 100))
+    thr = int(os.environ.get('COVERAGE_THRESHOLD', '0'))
+    print(f"Coverage: {pct}% (threshold {thr}%)")
+    if pct < thr:
+        print(f"ERROR: Coverage {pct}% is below threshold {thr}%")
+        sys.exit(1)
+except ET.ParseError as e:
+    print("ERROR: Failed to parse coverage.xml:", e)
+    print(open(cov_file).read())
+    sys.exit(1)
 PY
-)
-          echo "Coverage: ${PCT}% (threshold ${COVERAGE_THRESHOLD}%)"
-          if [ "$PCT" -lt "$COVERAGE_THRESHOLD" ]; then echo "Coverage ${PCT}% is below threshold ${COVERAGE_THRESHOLD}%"; exit 1; fi
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
