@@ -1,7 +1,7 @@
 [project]
 name = "fibonacci"
 version = "0.1.0"
-description = "Add your description here"
+description = "Utilities project: Fibonacci + common math, statistics, datetime, and finance helpers with Streamlit UI and FastAPI/fastmcp endpoints"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

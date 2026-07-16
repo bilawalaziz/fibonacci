@@ -1,7 +1,21 @@
 repos:
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: main
+    rev: v0.15.22
     hooks:
       - id: ruff
         args: ["--fix"]
 
+  - repo: local
+    hooks:
+      - id: mypy-local
+        name: mypy (uv)
+        entry: uv
+        args: ["run","mypy","src"]
+        language: system
+        pass_filenames: false
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.9.4
+    hooks:
+      - id: bandit
+        args: ["-r", "src"]
