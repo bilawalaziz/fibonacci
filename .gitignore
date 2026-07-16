@@ -1,10 +1,42 @@
-# Python-generated files
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[oc]
+*.py[co]
+*.pyd
+
+# Distribution / packaging
 build/
 dist/
 wheels/
-*.egg-info
+*.egg-info/
+.eggs/
 
 # Virtual environments
 .venv
+env/
+venv/
+
+# Pytest cache
+.pytest_cache/
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Python version manager
+.python-version
+
+# Docker
+docker-compose.override.yml
+*.log
+
+# Misc
+coverage.xml
+htmlcov/
