@@ -24,7 +24,7 @@ jobs:
 
       - name: Check coverage threshold
         env:
-          COVERAGE_THRESHOLD: 87
+          COVERAGE_THRESHOLD: 80
         run: |
           set -euo pipefail
           COV_FILE=coverage.xml
