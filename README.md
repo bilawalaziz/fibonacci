@@ -14,14 +14,14 @@ Contents
 - src/fibonacci.py — fibonacci(n) and fibonacci_sequence(n)
 - src/utils/ — math, stats, datetime, finance helper modules
 - tests/ — pytest tests
-- app/streamlit_app.py — UI to compute utilities
-- app/api.py — FastAPI endpoints for utilities
-- app/mcp_server.py — MCP metadata + utility endpoints (via fastmcp/FastAPI)
+- services/streamlit/streamlit_app.py — UI to compute utilities
+- services/api/api.py — FastAPI endpoints for utilities
+- services/mcp/mcp_server.py — MCP metadata + utility endpoints (via fastmcp/FastAPI)
 - Dockerfile, docker-compose.yml — run the services in containers
 
 Quickstart (local using uv):
 1. cd fibonacci
-2. uv run streamlit run app/streamlit_app.py  # UI on :8501
+2. uv run streamlit run services/streamlit/streamlit_app.py  # UI on :8501
 
 Run API locally:
 1. cd fibonacci
@@ -63,7 +63,7 @@ OpenAPI docs (FastAPI)
 - You can copy example request bodies from the /docs UI or use the example curl commands above.
 
 Publishing MCP to a registry / discovery server
-- A generic script is provided at app/mcp_publish.py. It requests local metadata and posts it to the registry URL.
+- A generic script is provided at services/mcp/mcp_publish.py. It requests local metadata and posts it to the registry URL.
 
 Usage:
 1) Make sure MCP server is running (docker compose up -d mcp) and reachable at http://localhost:9000
