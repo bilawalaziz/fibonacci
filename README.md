@@ -21,4 +21,3 @@ Run with Docker:
 1. docker compose up --build -d
 2. Open http://localhost:8501
 
-License: MIT (add your license)
