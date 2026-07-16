@@ -90,7 +90,3 @@ Development & checks
   uv run pytest --cov=src
 - Lint & typing (CI runs ruff, mypy, bandit via workflows)
 
-Notes
-- Codecov badge will show coverage percent after the coverage job uploads results (public repo).
-- pyproject.toml contains dependencies and a dev-group; uv was used to manage virtualenv and dev deps.
-
