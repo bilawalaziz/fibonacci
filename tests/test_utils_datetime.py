@@ -1,5 +1,4 @@
 from src.utils.datetime_utils import age, days_between, business_days_between
-from datetime import date
 
 
 def test_age():

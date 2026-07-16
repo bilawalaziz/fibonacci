@@ -1,4 +1,3 @@
-import pytest
 from src.utils.math_utils import factorial, gcd, lcm, is_prime, permutations, combinations
 
 

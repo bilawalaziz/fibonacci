@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
-from src.utils import math_utils, stats_utils, datetime_utils, finance_utils
+from src.utils import math_utils, stats_utils, finance_utils
 
 app = FastAPI(title="Utilities API")
 

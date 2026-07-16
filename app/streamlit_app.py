@@ -1,5 +1,4 @@
 import streamlit as st
-from src.fibonacci import fibonacci, fibonacci_sequence
 from src.utils import math_utils, stats_utils, datetime_utils, finance_utils
 
 st.title("Utilities Service")
