@@ -7,3 +7,23 @@ services:
       - ./:/app
     environment:
       - PYTHONUNBUFFERED=1
+
+  api:
+    build: .
+    command: ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  mcp:
+    build: .
+    command: ["uvicorn", "app.mcp_server:app", "--host", "0.0.0.0", "--port", "9000"]
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./:/app
+    environment:
+      - PYTHONUNBUFFERED=1

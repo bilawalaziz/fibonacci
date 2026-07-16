@@ -2,11 +2,14 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install runtime deps
-RUN pip install --no-cache-dir streamlit
+# Ensure project root is on PYTHONPATH so `from src...` imports work
+ENV PYTHONPATH=/app
 
 # Copy project
 COPY . /app
+
+# Install runtime deps from requirements
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8501
 
