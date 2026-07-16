@@ -1,4 +1,4 @@
-from src.utils.finance_utils import simple_interest, convert_currency, loan_amortization
+from src.fibonacci.utils.finance_utils import simple_interest, convert_currency, loan_amortization
 
 
 def test_simple_interest():

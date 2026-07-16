@@ -1,4 +1,4 @@
-from src.utils.stats_utils import mean, median, mode, variance, stdev, percentiles
+from src.fibonacci.utils.stats_utils import mean, median, mode, variance, stdev, percentiles
 
 
 def test_stats_basic():
