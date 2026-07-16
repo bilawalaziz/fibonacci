@@ -21,6 +21,23 @@ jobs:
       - name: Run tests with coverage
         run: |
           python -m pytest --cov=src --cov-report=xml -q
+
+      - name: Check coverage threshold
+        env:
+          COVERAGE_THRESHOLD: 85
+        run: |
+          # extract line-rate from coverage.xml (e.g. line-rate="0.87")
+          if [ ! -f coverage.xml ]; then echo "coverage.xml not found"; exit 1; fi
+          LR=$(grep -oP 'line-rate="\K[0-9\.]+(?=\")' coverage.xml || true)
+          if [ -z "$LR" ]; then echo "Could not parse coverage.xml"; cat coverage.xml; exit 1; fi
+          PCT=$(python - <<PY
+lr = float('$LR')
+print(int(round(lr*100)))
+PY
+)
+          echo "Coverage: ${PCT}% (threshold ${COVERAGE_THRESHOLD}%)"
+          if [ "$PCT" -lt "$COVERAGE_THRESHOLD" ]; then echo "Coverage ${PCT}% is below threshold ${COVERAGE_THRESHOLD}%"; exit 1; fi
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:

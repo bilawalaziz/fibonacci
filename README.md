@@ -40,9 +40,42 @@ MCP server (metadata + proxy):
 
 API examples (FastAPI endpoints):
 - POST /math/gcd  JSON {"a":int, "b":int}
+  Example using curl:
+    curl -X POST -H "Content-Type: application/json" -d '{"a":12,"b":18}' http://localhost:8000/math/gcd
+    Response: {"result":6}
+
 - POST /math/factorial  JSON {"n":int}
+  Example:
+    curl -X POST -H "Content-Type: application/json" -d '{"n":10}' http://localhost:8000/math/factorial
+    Response: {"result":3628800}
+
 - POST /stats/mean  JSON {"data": [1,2,3]}
-- POST /finance/loan  params principal, annual_rate, years
+  Example:
+    curl -X POST -H "Content-Type: application/json" -d '{"data":[1,2,3]}' http://localhost:8000/stats/mean
+    Response: {"result":2.0}
+
+- POST /finance/loan  JSON {"principal":1000, "annual_rate":0.05, "years":2}
+  Example:
+    curl -X POST -H "Content-Type: application/json" -d '{"principal":1000, "annual_rate":0.0, "years":2, "payments_per_year":1}' http://localhost:8000/finance/loan
+
+OpenAPI docs (FastAPI)
+- Visit http://localhost:8000/docs for interactive OpenAPI UI.
+- You can copy example request bodies from the /docs UI or use the example curl commands above.
+
+Publishing MCP to a registry / discovery server
+- A generic script is provided at app/mcp_publish.py. It requests local metadata and posts it to the registry URL.
+
+Usage:
+1) Make sure MCP server is running (docker compose up -d mcp) and reachable at http://localhost:9000
+2) Set the registry endpoint and optional token:
+   export MCP_REGISTRY_URL=https://mcp-registry.example.com/register
+   export MCP_REGISTRY_TOKEN=secrettoken
+3) Run the publisher locally (uses project's virtualenv):
+   .venv/bin/python -m app.mcp_publish
+
+Notes:
+- The registry contract varies; this script POSTs the metadata JSON to the registry URL. Adjust the script if your registry expects different fields or endpoints.
+- After publishing, the registry should return a JSON response indicating success. The script prints the response.
 
 Running in Docker (recommended reproducible setup):
 1. docker compose up --build -d
