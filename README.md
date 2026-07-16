@@ -94,5 +94,3 @@ Notes
 - Codecov badge will show coverage percent after the coverage job uploads results (public repo).
 - pyproject.toml contains dependencies and a dev-group; uv was used to manage virtualenv and dev deps.
 
-If you want, add more utilities or expose them in a public MCP registry; next steps: push remaining commits and monitor CI/workflows.
-

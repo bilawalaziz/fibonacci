@@ -24,7 +24,7 @@ jobs:
 
       - name: Check coverage threshold
         env:
-          COVERAGE_THRESHOLD: 85
+          COVERAGE_THRESHOLD: 87
         run: |
           # extract line-rate from coverage.xml (e.g. line-rate="0.87")
           if [ ! -f coverage.xml ]; then echo "coverage.xml not found"; exit 1; fi
