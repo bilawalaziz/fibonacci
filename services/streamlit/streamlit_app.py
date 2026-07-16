@@ -1,5 +1,6 @@
 import streamlit as st
-from src.utils import math_utils, stats_utils, datetime_utils, finance_utils
+import datetime
+from src.fibonacci.utils import math_utils, stats_utils, datetime_utils, finance_utils
 
 st.title("Utilities Service")
 
@@ -52,12 +53,14 @@ elif category == "Statistics":
 elif category == "Date/Time":
     func = st.selectbox("Function", ["age", "days_between", "business_days_between"])
     if func == "age":
-        bd = st.date_input("Birth date")
+        today = datetime.date.today()
+        bd = st.date_input("Birth date", value=today.replace(year=today.year-30), min_value=datetime.date(1900,1,1), max_value=today)
         if st.button("Compute"):
             st.write(module.age(bd.isoformat()))
     else:
-        s = st.date_input("Start date")
-        e = st.date_input("End date")
+        today = datetime.date.today()
+        s = st.date_input("Start date", value=today - datetime.timedelta(days=7), min_value=datetime.date(1900,1,1), max_value=today)
+        e = st.date_input("End date", value=today, min_value=datetime.date(1900,1,1), max_value=today)
         if st.button("Compute"):
             st.write(getattr(module, func)(s.isoformat(), e.isoformat()))
 
