@@ -21,7 +21,7 @@ except Exception:
     app = FastAPI(title="MCP Server (metadata)")
 
 # Import utility implementations
-from src.utils import math_utils, stats_utils, datetime_utils, finance_utils
+from src.fibonacci.utils import math_utils, stats_utils, datetime_utils, finance_utils
 
 
 def _endpoints() -> List[Dict[str, Any]]:
