@@ -1,6 +1,6 @@
 # fibonacci
 
-[![CI](https://github.com/bilawalaziz/fibonacci/actions/workflows/ci.yml/badge.svg)](https://github.com/bilawalaziz/fibonacci/actions/workflows/ci.yml)
+[![CI](https://github.com/bilawalaziz/fibonacci/actions/workflows/ci.yml/badge.svg)](https://github.com/bilawalaziz/fibonacci/actions/workflows/ci.yml) [![Docker Build](https://github.com/bilawalaziz/fibonacci/actions/workflows/docker-build.yml/badge.svg)](https://github.com/bilawalaziz/fibonacci/actions/workflows/docker-build.yml)
 
 A small Python project providing Fibonacci utilities and a Streamlit demo.
 
